@@ -1,0 +1,19 @@
+{
+  "documents": [
+    {
+      "id": "doc-001",
+      "title": "Guide d’indexation",
+      "text": "L’indexation doit conserver les métadonnées, les timestamps et les sources."
+    },
+    {
+      "id": "doc-002",
+      "title": "Politique de fraîcheur",
+      "text": "La fraîcheur doit être mesurée et pilotée par des seuils et des alertes."
+    },
+    {
+      "id": "doc-003",
+      "title": "Reranking",
+      "text": "Le reranking améliore la pertinence en réordonnant les passages sur la requête."
+    }
+  ]
+}

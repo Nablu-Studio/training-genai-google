@@ -1,0 +1,7 @@
+{
+  "fields": [
+    "latencyMs",
+    "modelId",
+    "promptHash"
+  ]
+}

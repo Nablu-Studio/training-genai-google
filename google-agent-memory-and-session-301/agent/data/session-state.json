@@ -1,0 +1,16 @@
+{
+  "sessionId": "demo-session-001",
+  "goal": "Produire une synthèse et préparer la prochaine action.",
+  "constraints": [
+    "Réponse courte",
+    "Citations explicites des décisions précédentes"
+  ],
+  "lastDecision": {
+    "choice": "Prioriser la qualité sur la latence",
+    "rationale": "Le cas d’usage est critique et tolère un coût supérieur."
+  },
+  "notes": [
+    "La mémoire durable doit rester minimale",
+    "Le rapport de reprise doit être vérifiable"
+  ]
+}

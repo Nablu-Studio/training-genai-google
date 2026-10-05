@@ -1,0 +1,10 @@
+{
+  "gemini-2.5-flash": {
+    "cost": "low",
+    "latency": "low"
+  },
+  "gemini-2.5-pro": {
+    "cost": "medium",
+    "latency": "medium"
+  }
+}
