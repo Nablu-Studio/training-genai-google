@@ -1,0 +1,10 @@
+[
+  {
+    "id": "doc-1",
+    "content": "Vertex AI combine retrieval et generation."
+  },
+  {
+    "id": "doc-2",
+    "content": "Le grounding reduit les hallucinations."
+  }
+]

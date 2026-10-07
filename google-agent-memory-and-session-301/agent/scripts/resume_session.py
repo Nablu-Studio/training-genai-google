@@ -12,9 +12,9 @@ def main():
     client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", "demo-key"))
 
     prompt = (
-        "Tu es un agent. Reprends la session et propose une prochaine action.\n"
+        "You are an AI agent. Resume the session and recommend the next action.\n"
         f"Etat de session: {json.dumps(state, ensure_ascii=False)}\n"
-        "Réponds en JSON avec les clés: resumedGoal, resumedDecision, nextAction, rationale."
+        "Respond in JSON with keys: resumedGoal, resumedDecision, nextAction, rationale."
     )
 
     response = client.models.generate_content(
@@ -27,7 +27,7 @@ def main():
         "resumedGoal": state.get("goal"),
         "resumedDecision": state.get("lastDecision"),
         "nextAction": getattr(response, "text", ""),
-        "rationale": "Synthèse produite à partir de l’état et d’une réponse Gemini.",
+        "rationale": "Summary produced from session state and Gemini response.",
     }
 
     Path("agent/session-report.json").write_text(

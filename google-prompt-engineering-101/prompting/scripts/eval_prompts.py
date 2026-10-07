@@ -1,4 +1,4 @@
-"""Evalue deux prompts Gemini avec le SDK Google GenAI."""
+"""Evaluates two Gemini prompt variants using the Google GenAI SDK."""
 import json
 import os
 from pathlib import Path

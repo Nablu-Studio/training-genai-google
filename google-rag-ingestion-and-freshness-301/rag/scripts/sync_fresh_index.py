@@ -35,10 +35,10 @@ def main():
         )
 
     prompt = (
-        "Tu es un assistant d’exploitation RAG.\n"
+        "You are a RAG operations assistant.\n"
         f"Politique: {json.dumps(policy, ensure_ascii=False)}\n"
         f"Statuts: {json.dumps(statuses, ensure_ascii=False)}\n"
-        "Propose une action de synchronisation prioritaire."
+        "Recommend a high-priority index synchronization action."
     )
 
     response = client.models.generate_content(

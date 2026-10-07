@@ -12,9 +12,9 @@ def main():
     client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", "demo-key"))
 
     prompt = (
-        "Tu es un assistant SRE. À partir de seuils, propose un état de santé.\n"
+        "You are an SRE assistant. Given threshold metrics, determine system health status.\n"
         f"Seuils: {json.dumps(thresholds, ensure_ascii=False)}\n"
-        "Retourne une synthèse courte et une action recommandée."
+        "Return a concise health summary and recommended action."
     )
 
     response = client.models.generate_content(

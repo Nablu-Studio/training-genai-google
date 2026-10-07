@@ -1,4 +1,4 @@
-"""Audite un prompt sensible avec le SDK Google GenAI."""
+"""Audits sensitive prompt inputs using the Google GenAI SDK."""
 import json
 import os
 from pathlib import Path
@@ -17,7 +17,7 @@ def main() -> None:
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=(
-            "Classe le risque de ce prompt et propose une reformulation sure.\n"
+            "Classify the safety risk of this prompt and suggest a secure reformulation.\n"
             f"Prompt: {reviewed_prompt}"
         ),
     )

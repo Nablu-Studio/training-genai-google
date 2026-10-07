@@ -1,0 +1,5 @@
+{
+  "name": "weather-agent",
+  "tool": "weather_tool",
+  "output": "summary"
+}

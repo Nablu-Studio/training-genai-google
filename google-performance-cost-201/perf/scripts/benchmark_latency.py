@@ -1,4 +1,4 @@
-"""Mesure la latence reelle de modeles Gemini (Vertex AI) sous un profil de charge.
+"""Measures real-world latency of Gemini models (Vertex AI) under a load profile.
 
 Parent lab: google-performance-cost-201.
 Entrees : perf/data/load-profile.json (rps, promptTokens)
@@ -21,11 +21,11 @@ from google import genai
 from google.genai import errors, types
 
 PERF_DIR = Path(__file__).resolve().parents[1]
-CHARS_PER_TOKEN = 4  # approximation suffisante pour calibrer la taille du prompt
+CHARS_PER_TOKEN = 4  # heuristic approximation to estimate prompt token length
 
 
 def percentile(values: list[float], pct: float) -> float | None:
-    """Percentile par rang le plus proche : pas d'interpolation, lisible."""
+    """Nearest-rank percentile: discrete non-interpolated latency measurement."""
     if not values:
         return None
     ordered = sorted(values)
@@ -60,7 +60,7 @@ def bench_model(client: genai.Client, model: str, profile: dict, requests: int) 
                 prompt_tokens.append(usage.prompt_token_count or 0)
                 completion_tokens.append(usage.candidates_token_count or 0)
         except errors.APIError as exc:
-            # Un 429 (quota) est un signal de capacite, pas un bug : on le compte a part.
+            # HTTP 429 (quota limit) is a capacity signal: track it separately.
             if getattr(exc, "code", None) == 429:
                 throttled += 1
             else:
@@ -88,7 +88,7 @@ def bench_model(client: genai.Client, model: str, profile: dict, requests: int) 
 def main() -> None:
     project = os.getenv("GOOGLE_CLOUD_PROJECT")
     if not project:
-        sys.exit("Definissez GOOGLE_CLOUD_PROJECT (et authentifiez-vous avec gcloud) avant de lancer le benchmark.")
+        sys.exit("Set GOOGLE_CLOUD_PROJECT (and authenticate via gcloud) before running the benchmark.")
 
     profile = json.loads((PERF_DIR / "data/load-profile.json").read_text(encoding="utf-8"))
     matrix = json.loads((PERF_DIR / "data/model-matrix.json").read_text(encoding="utf-8"))

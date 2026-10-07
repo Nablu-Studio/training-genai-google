@@ -14,10 +14,10 @@ def main():
     steps_report = []
     for step in plan.get("steps", []):
         prompt = (
-            "Tu exécutes une étape d’un workflow d’agent.\n"
+            "You are executing a step in an agent workflow.\n"
             f"Étape: {json.dumps(step, ensure_ascii=False)}\n"
             f"Objectif: {plan.get('goal')}\n"
-            "Produit une sortie courte."
+            "Produce a concise output."
         )
         response = client.models.generate_content(
             model=os.getenv("GOOGLE_MODEL", "gemini-2.5-flash"),

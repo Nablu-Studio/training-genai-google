@@ -1,0 +1,2 @@
+Exemple: Q: service Google GenAI ? A: Vertex AI.
+Reponds ensuite en une phrase.

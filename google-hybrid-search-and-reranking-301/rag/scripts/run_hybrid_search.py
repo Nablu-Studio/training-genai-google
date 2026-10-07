@@ -13,10 +13,10 @@ def main():
     client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", "demo-key"))
 
     prompt = (
-        "Tu dois reranker des documents pour une recherche hybride.\n"
+        "Rerank candidate documents for hybrid search retrieval.\n"
         f"Requête: {plan.get('query')}\n"
         f"Documents: {json.dumps(corpus.get('documents', []), ensure_ascii=False)}\n"
-        "Retourne une liste ordonnée des ids, du plus pertinent au moins pertinent."
+        "Return an ordered list of document IDs from most relevant to least relevant."
     )
 
     response = client.models.generate_content(

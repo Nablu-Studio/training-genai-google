@@ -1,4 +1,4 @@
-"""Execute un agent Gemini outille et ecrit une trace JSON."""
+"""Executes a tool-enabled Gemini agent and writes a JSON execution trace."""
 import json
 import os
 from pathlib import Path
@@ -19,7 +19,7 @@ def main() -> None:
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=(
-            "Tu es un agent outille. Utilise la sortie outil pour repondre au voyageur.\n"
+            "You are a tool-enabled agent. Use the tool output to respond to the traveler.\n"
             f"Tool result: {json.dumps(weather)}"
         ),
     )

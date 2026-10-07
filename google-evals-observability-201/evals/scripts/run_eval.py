@@ -1,4 +1,4 @@
-"""Evalue un modele Gemini (Vertex AI) sur un jeu de cas et trace chaque appel.
+"""Evaluates a Gemini model (Vertex AI) against test cases and traces each invocation.
 
 Parent lab: google-evals-observability-201.
 Entrees : evals/datasets/cases.json (questions, contexte, attendus)
@@ -24,8 +24,8 @@ from google.genai import errors, types
 
 EVALS_DIR = Path(__file__).resolve().parents[1]
 SYSTEM_PROMPT = (
-    "Tu reponds uniquement a partir du contexte fourni. "
-    "Si l'information est absente, dis que le contexte ne permet pas de repondre."
+    "Answer ONLY using the provided context. "
+    "If the information is missing, state that the context does not contain the answer."
 )
 
 
@@ -48,7 +48,7 @@ def score_case(case: dict, answer: str) -> tuple[bool, float]:
 def main() -> None:
     project = os.getenv("GOOGLE_CLOUD_PROJECT")
     if not project:
-        sys.exit("Definissez GOOGLE_CLOUD_PROJECT (et authentifiez-vous avec gcloud) avant de lancer l'evaluation.")
+        sys.exit("Set GOOGLE_CLOUD_PROJECT (and authenticate via gcloud) before running the evaluation.")
     model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     cases = json.loads((EVALS_DIR / "datasets/cases.json").read_text(encoding="utf-8"))
@@ -77,8 +77,8 @@ def main() -> None:
         try:
             response = client.models.generate_content(model=model, contents=user_prompt, config=config)
         except errors.APIError as exc:
-            # Un echec d'appel est un resultat d'evaluation, pas une raison d'arreter le run.
-            # Fail closed : un cas sans reponse compte 0, sinon le score serait flatteur.
+            # An invocation failure is an evaluation result, not a reason to abort the run.
+            # Fail closed: missing model answers score 0 to prevent artificial inflation.
             results.append(
                 {"id": case["id"], "kind": case["kind"], "passed": False, "score": 0.0, "error": str(exc)}
             )
@@ -90,7 +90,7 @@ def main() -> None:
         if response.usage_metadata:
             total_tokens += response.usage_metadata.total_token_count or 0
 
-        # La trace suit exactement le schema versionne dans le workspace.
+        # Execution trace strictly adheres to the versioned schema in the workspace.
         trace = {
             "latencyMs": latency_ms,
             "modelId": model,

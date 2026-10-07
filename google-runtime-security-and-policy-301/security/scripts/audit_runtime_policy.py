@@ -12,9 +12,9 @@ def main():
     client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY", "demo-key"))
 
     prompt = (
-        "Tu es un auditeur de policy runtime GenAI.\n"
+        "You are a GenAI runtime policy auditor.\n"
         f"Policy: {json.dumps(policy, ensure_ascii=False)}\n"
-        "Retourne une synthèse courte des risques et une action recommandée."
+        "Return a concise risk summary and recommended mitigation action."
     )
 
     response = client.models.generate_content(

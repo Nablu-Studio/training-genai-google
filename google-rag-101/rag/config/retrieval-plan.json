@@ -1,0 +1,5 @@
+{
+  "topK": 3,
+  "grounding": true,
+  "provider": "vertex-ai"
+}
